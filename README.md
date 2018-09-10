@@ -1,6 +1,6 @@
 ##  spring-boot-restSpring-Boot-Rest-API 
 
-Le but de ce tutorial est de créer une application Spring Boot basée sur le système Restful pour la gestion des salariés.
+Le but de ce tutorial est de créer une application Spring Boot basée sur le système Restful pour la gestion des salariés.      
 Avant de commencer on doit introduire quelques notions :
 ## I.	Spring Boot
 Spring Boot est un conteneur qui comporte tous les projets Spring. Il reprend une infrastructure similaire à un serveur d’application JEE avec un minimum ou presque sans configuration.

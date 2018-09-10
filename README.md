@@ -28,8 +28,11 @@ Puis on remplit les informations demandées :
  GroupId : l’identifiant unique de l’organisation ou l’entreprise qui est généralement sous la forme : com.monentreprise.
 ArtifactId : nom unique du projet
 Et la version du projet.
- 
+      ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/2.png)
+
 On obtient un projet Spring Boot avec un fichier de configuration maven : Pom.xml.
+      ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/3.png)
+
  
 Maintenant on peut ajouter les dépendances nécessaires.
 
@@ -45,7 +48,8 @@ On doit créer un package sous java puis une classe « MainApplicationClass.java
 @SpringBootApplication : pour indiquer qu’il s’agit d’une application Spring Boot.
 Maintenant on peut exécuter l’application sur le port par défaut 8080.
 
- 
+       ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/4.png)
+
 Jusqu’à maintenant l’adresse localhost:8080 ce qui est normal puisqu’on n’a pas encore créer le contrôleur. 
 Contrôleur :
 Le contrôleur reçoit les requêtes des clients et renvoi les réponses.
@@ -57,6 +61,8 @@ SalariesController.java
 
 @RestController : indique qu’il s’agit un controller, elle combine les deux annotations : @Controller et @ResponseBody.
 @RequestMapping : 
+       ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/5.png)
+
 
 
 

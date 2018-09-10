@@ -21,6 +21,8 @@ Donc pour créer un projet Spring Boot il y a trois façons :
 3.	 Maven with IDE : la méthode utilisée pour le présent projet :
 	Dand Intellij IDEA : File puis new project et on choisit Maven
 
+     ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/nouveauprojet.png)
+    
  
 Puis on remplit les informations demandées :
  GroupId : l’identifiant unique de l’organisation ou l’entreprise qui est généralement sous la forme : com.monentreprise.

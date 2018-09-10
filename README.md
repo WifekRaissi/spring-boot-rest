@@ -14,7 +14,8 @@ L'IDE préféré, on a chois de travailler avec Intellij IDEA
 ## IV.	Création du projet :
 
 La figure suivante présente l'architecture du projet à réaliser durant ce tutorial.
-        ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/architecture.PNG)
+
+                ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/architecture.PNG)
 
 Une application Spring Boot peut être créée selon l’arborescence  de Maven ou Gradle. Pour comprendre la différence entre les deux outils, cet article explique bien la différence.
 https://gradle.org/maven-vs-gradle/
@@ -25,9 +26,8 @@ Pour créer le projet il y a trois façons :
 3. Maven with IDE : la méthode utilisée pour le présent projet :
 
 Dand Intellij IDEA : File puis new project et on choisit Maven,
-<p align="center">
+
    ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/nouveauprojet.png)
-</p>
 
    
  Puis on remplit les informations demandées :
@@ -111,8 +111,8 @@ public class MainApplicationClass {
 }
 ```
 @SpringBootApplication : pour indiquer qu’il s’agit d’une application Spring Boot.
-Maintenant on peut exécuter l’application sur le port par défaut 8080.
-      ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/4.png)
+Maintenant on peut exécuter l’application sur le port par défaut 8080. 
+               ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/4.png)
 
 Jusqu’à maintenant l’adresse localhost:8080 affiche une erreur ce qui est normal puisqu’on n’a pas encore créer le contrôleur. 
 

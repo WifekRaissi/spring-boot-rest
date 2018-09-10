@@ -400,8 +400,8 @@ public class SalariesServiceImpl implements SalariesService {
  
  ### SalariesController
  
- 
-`package com.axeane.controllers;
+ ```
+package com.axeane.controllers;
 
 import com.axeane.model.Salarie;
 import com.axeane.services.SalariesService;
@@ -467,7 +467,6 @@ public class SalariesController {
         return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 }
-``
 ```
 
 

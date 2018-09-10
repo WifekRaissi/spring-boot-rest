@@ -8,11 +8,12 @@ Spring Boot est un conteneur qui comporte tous les projets Spring. Il reprend un
 Les API Rest sont basées sur l’ Hypertext Transfer Protocol (HTTP), un protocole qui définit la communication entre les différentes parties d’une application web. Un client lance une requête HTTP, et le serveur renvoie une réponse à travers plusieurs méthodes dont les plus utilisées sont : POST, GET, PUT et  DELETE.
 ## III.	Outils
 JDK 1.7+
+
 L'IDE préféré, on a chois de travailler avec Intellij IDEA
 
 ## IV.	Création du projet :
 
-      ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/architecture.PNG)
+  ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/architecture.PNG)
 
 Une application Spring Boot est créée selon l’arborescence  de Maven ou Gradle, pour comprendre la différence entre les deux outils, cet article explique bien la différence.
 https://gradle.org/maven-vs-gradle/

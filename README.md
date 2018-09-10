@@ -4,14 +4,17 @@ Durant ce tutorial on est mené à créer une application Spring Boot basée sur
 Avant de commencer on doit définir quelques notions :
 ## I.	Spring Boot
 Spring Boot est un conteneur qui comporte tous les projets Spring. Il reprend une infrastructure similaire à un serveur d’application JEE avec un minimum ou presque sans configuration.
-Spring Boot consiste à créer des applications java en se concentrant sur le métier.
 ## II.	Rest API
 Les API Rest sont basées sur l’ Hypertext Transfer Protocol (HTTP), un protocole qui définit la communication entre les différentes parties d’une application web. Un client lance une requête HTTP, et le serveur renvoie une réponse à travers plusieurs méthodes dont les plus utilisées sont : POST, GET, PUT et  DELETE.
 ## III.	Outils
-	Java Development Kit (JDK) 1.7+
-	L’environnement de développement préféré, on a choisi de travailler avec Intellij IDEA.
+JDK 1.7+
+
+L'IDE préféré, on a chois de travailler avec Intellij IDEA
 
 ## IV.	Création du projet :
+
+   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/architecture.PNG)
+
 Une application Spring Boot est créée selon l’arborescence  de Maven ou Gradle, pour comprendre la différence entre les deux outils, cet article explique bien la différence.
 https://gradle.org/maven-vs-gradle/
 Durant ce projet on a utilisé Maven.
@@ -35,7 +38,52 @@ On obtient un projet Spring Boot avec un fichier de configuration maven : Pom.xm
 
  
 Maintenant on peut ajouter les dépendances nécessaires.
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.axeane</groupId>
+    <artifactId>SpringBootRest</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.4.RELEASE</version>
+    </parent>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>2.0.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+```
 
 
 <parent> : pour hériter les propriétés du spring-boot-starter-parent comme le numéro du port  et la configuration.
@@ -43,19 +91,45 @@ Maintenant on peut ajouter les dépendances nécessaires.
 <build> : contient les plugins.
 On doit mettre à jour le fichier Pom pour télécharger les dépendances (clic droit sur le projet créé ->Maven->Generate Sources and Update Folders).
 
-## Classe Main :
+# Main Class 
 On doit créer un package sous java puis une classe « MainApplicationClass.java »
+```
+package com.axeane;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MainApplicationClass {
+
+    public static void main(String[] args) {
+        SpringApplication.run(MainApplicationClass.class, args);
+    }
+}
+```
 @SpringBootApplication : pour indiquer qu’il s’agit d’une application Spring Boot.
 Maintenant on peut exécuter l’application sur le port par défaut 8080.
-
-       ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/4.png)
+      ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/4.png)
 
 Jusqu’à maintenant l’adresse localhost:8080 ce qui est normal puisqu’on n’a pas encore créer le contrôleur. 
 Contrôleur :
 Le contrôleur reçoit les requêtes des clients et renvoi les réponses.
-SalariesController.java
+#SalariesController.java
+```
+package com.axeane.controllers;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+public class SalariesController {
+
+    @RequestMapping("/")
+    public String index() {
+        return "votre controller SalariesController.java a été bien créé";
+    }
+}
+```
 
 
 

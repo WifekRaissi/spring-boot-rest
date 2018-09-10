@@ -15,7 +15,7 @@ L'IDE préféré, on a chois de travailler avec Intellij IDEA
 
 La figure suivante présente l'architecture du projet à réaliser durant ce tutorial.
 
-                ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/architecture.PNG)
+   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/architecture.PNG)
 
 Une application Spring Boot peut être créée selon l’arborescence  de Maven ou Gradle. Pour comprendre la différence entre les deux outils, cet article explique bien la différence.
 https://gradle.org/maven-vs-gradle/

@@ -19,7 +19,7 @@ Donc pour créer un projet Spring Boot il y a trois façons :
 1.	Spring Boot Initializer : on a utilisé cette méthode durant le premier tutorial Spring Boot-Kotlin(https://medium.com/@wifekraissi/a-very-beginner-journey-with-kotlin-and-spring-boot-c46adeff9db8)
 2.	Command Line Tool (CLI)
 3.	 Maven with IDE : la méthode utilisée pour le présent projet :
-	Dand Intellij IDEA : File puis new project et on choisit Maven
+	Dand Intellij IDEA : File puis new project et on choisit Maven
 
  
 Puis on remplit les informations demandées :

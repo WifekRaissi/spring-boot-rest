@@ -1,4 +1,4 @@
-##  spring-boot-restSpring-Boot-Rest-API 
+#     Spring-Boot-Rest-API 
 
 Le but de ce tutorial est de créer une application Spring Boot basée sur le système Restful pour la gestion des salariés.      
 Avant de commencer on doit introduire quelques notions :
@@ -7,6 +7,7 @@ Spring Boot est un conteneur qui comporte tous les projets Spring. Il reprend un
 ## II.	Rest API
 Les API Rest sont basées sur l’Hypertext Transfer Protocol (HTTP), un protocole qui définit la communication entre les différentes parties d’une application web. Un client lance une requête HTTP, et le serveur renvoie une réponse à travers plusieurs méthodes dont les plus utilisées sont : POST, GET, PUT et  DELETE.
 ## III.	Outils
+
 JDK 1.7+
 
 L'IDE préféré, on a chois de travailler avec Intellij IDEA
@@ -15,7 +16,13 @@ L'IDE préféré, on a chois de travailler avec Intellij IDEA
 
 La figure suivante présente l'architecture du projet à réaliser durant ce tutorial.
 
+
+
+
    ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/architecture.PNG)
+   
+   
+   
 
 Une application Spring Boot peut être créée selon l’arborescence  de Maven ou Gradle. Pour comprendre la différence entre les deux outils, cet article explique bien la différence.
 https://gradle.org/maven-vs-gradle/
@@ -25,19 +32,29 @@ Pour créer le projet il y a trois façons :
 2.Command Line Tool (CLI)
 3. Maven with IDE : la méthode utilisée pour le présent projet :
 
-Dand Intellij IDEA : File puis new project et on choisit Maven,
+Dans Intellij IDEA : File puis new project et on choisit Maven,
+
+
+
 
    ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/nouveauprojet.png)
+   
 
    
  Puis on remplit les informations demandées :
  GroupId : l’identifiant unique de l’organisation ou l’entreprise qui est généralement sous la forme : com.monentreprise.
  ArtifactId :le nom unique du projet
  La version du projet.
-      ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/2.png)
+ 
+ 
+
+   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/2.png)
+   
 
 On obtient un projet Spring Boot avec un fichier de configuration maven : Pom.xml.
-      ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/3.png)
+
+
+   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/3.png)
 
  
 Maintenant on peut ajouter les dépendances nécessaires.
@@ -112,14 +129,19 @@ public class MainApplicationClass {
 ```
 @SpringBootApplication : pour indiquer qu’il s’agit d’une application Spring Boot.
 Maintenant on peut exécuter l’application sur le port par défaut 8080. 
-               ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/4.png)
+
+
+
+   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/4.png)
+   
+   
 
 Jusqu’à maintenant l’adresse localhost:8080 affiche une erreur ce qui est normal puisqu’on n’a pas encore créer le contrôleur. 
 
-# Contrôleur:
+## Contrôleur:
 Le contrôleur asssure la communication entre l'application et les clients, il reçoit les requêtes  et renvoi les réponses.
 
-# SalariesController.java
+## SalariesController.java
 ```
 package com.axeane.controllers;
 
@@ -142,15 +164,310 @@ public class SalariesController {
 
 Maintenant si on exécute l'application le message défini dans le contrôleur sera affiché.
 
+
+
    ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/5.png)
 
 
+## Salarie.java
+Le but du contrôleur SalariesController est de gérer les requêtes concernant les salaries. Pour ce fait on doit créer une classe Salarie
+```
+package com.axeane.model;
+
+import org.springframework.beans.factory.annotation.Required;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.math.BigDecimal;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class Salarie {
+    private long id;
+    private static final AtomicInteger count = new AtomicInteger(-1);
+
+    @NotEmpty
+    @NotNull
+    private String nom;
+
+    @NotEmpty
+    @NotNull
+    private String prenom;
+
+    @NotNull
+    private BigDecimal salaire;
+
+    @NotEmpty
+    @NotNull
+    @Size(max = 256, message = "address should have maximum 256 characters")
+    private String adresse;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public BigDecimal getSalaire() {
+        return salaire;
+    }
+
+    public void setSalaire(BigDecimal salaire) {
+        this.salaire = salaire;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    @Required
+    public void setAdresse(String adresse) {
+
+        this.adresse = adresse;
+    }
+
+    public Salarie() {
+    }
+
+    public Salarie(Long id, String nom, String prenom, BigDecimal salaire, String adresse) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.salaire = salaire;
+        this.adresse = adresse;
+    }
+
+    public Salarie(String nom, String prenom, BigDecimal salaire, String adresse) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.salaire = salaire;
+        this.adresse = adresse;
+        id = count.incrementAndGet();
+    }
+
+    @Override
+    public String toString() {
+        return "Salarie{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", salaire=" + salaire +
+                ", adresse='" + adresse + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Salarie)) return false;
+        Salarie salarie = (Salarie) o;
+        return getId() == salarie.getId() &&
+                Objects.equals(getNom(), salarie.getNom()) &&
+                Objects.equals(getPrenom(), salarie.getPrenom()) &&
+                Objects.equals(getSalaire(), salarie.getSalaire()) &&
+                Objects.equals(getAdresse(), salarie.getAdresse());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getNom(), getPrenom(), getSalaire(), getAdresse());
+    }
+}
+```
+## Services
+Maintenant on ajoute une interface SalariesService définissant les différentes méthodes gérées par le contôleur.
+Ces méthodes sont implémentées dans la classe SalariesServicesImpl.
+
+### SalariesService
+```
+package com.axeane.services;
 
 
+import com.axeane.model.Salarie;
 
+import java.util.List;
+
+public interface SalariesService {
+
+    void addsalarie(Salarie salarie);
+
+    List<Salarie> getListSalaries();
+
+    Salarie findSalariedById(Long searchedId);
+
+    void deleteSalaried(Long id);
+
+    void updateSalarie(Salarie salaried);
+
+}
+
+```
+### SalariesServiceImpl
+```
+package com.axeane.services;
+
+
+import com.axeane.model.Salarie;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+
+@Service
+public class SalariesServiceImpl implements SalariesService {
+
+    private static SalariesServiceImpl instance = null;
+
+    public static SalariesServiceImpl getInstance() {
+        if (instance == null) {
+            instance = new SalariesServiceImpl();
+        }
+        return instance;
+    }
+
+    private Logger logger = LoggerFactory.getLogger(SalariesServiceImpl.class);
+    private List<Salarie> salariess = Stream.of(
+            new Salarie("ilyes", "raissi", new BigDecimal(444444), "Tunis"),
+            new Salarie("rahma", "raissi", new BigDecimal(55555), "Tunis"),
+            new Salarie("amine", "raissi", new BigDecimal(88888), "Tunis"),
+            new Salarie("ines", "raissi", new BigDecimal(999999), "Tunis"))
+            .collect(Collectors.toList());
+
+    @Override
+    public void addsalarie(Salarie salarie) {
+        salariess.add(salarie);
+    }
+
+    @Override
+    public List<Salarie> getListSalaries() {
+        return salariess;
+    }
+
+    @Override
+    public Salarie findSalariedById(Long searchedId) {
+        return salariess.stream()
+                .filter(x -> searchedId.equals((x.getId())))
+                .findAny()
+                .orElse(null);
+    }
+
+    @Override
+    public void deleteSalaried(Long id) {
+        Salarie salarie = findSalariedById(id);
+        salariess.remove(salarie);
+    }
+
+    @Override
+    public void updateSalarie(Salarie salarie) {
+        Salarie salarie1 = findSalariedById(salarie.getId());
+        if (salarie1 != null) {
+            salarie1.setNom(salarie.getNom());
+            salarie1.setPrenom(salarie.getPrenom());
+            salarie1.setAdresse(salarie.getAdresse());
+            salarie1.setSalaire(salarie.getSalaire());
+        }
+    }
+
+}
+
+```
  
  
+ 
+ ### SalariesController
+ 
+ ```
+package com.axeane.controllers;
 
+import com.axeane.model.Salarie;
+import com.axeane.services.SalariesService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/salaries")
+public class SalariesController {
+
+    private final SalariesService salariesService;
+
+    public SalariesController(SalariesService salariesService) {
+        this.salariesService = salariesService;
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity addSalaries(@RequestBody Salarie salarie) {
+        salariesService.addsalarie(salarie);
+        return new ResponseEntity<>(salarie, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity getSalaries() {
+        List<Salarie> salaries = salariesService.getListSalaries();
+        if (salaries != null) {
+            return new ResponseEntity<>(salaries, HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getSalariesById(@PathVariable("id") long id) {
+        Salarie salarie = salariesService.findSalariedById(id);
+        if (salarie != null) {
+            return new ResponseEntity<>(salarie, HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping
+    public ResponseEntity updateSalaries(@RequestBody Salarie salarie) {
+        if (salariesService.findSalariedById(salarie.getId()) != null) {
+            salariesService.updateSalarie(salarie);
+            return new ResponseEntity<>(salarie, HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
+
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteSalaries(@PathVariable("id") Long id) {
+        Salarie salarie = salariesService.findSalariedById(id);
+        if (salarie != null) {
+            salariesService.deleteSalaried(id);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
+}
+```
 
 
 

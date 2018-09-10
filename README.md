@@ -1,4 +1,4 @@
-##  spring-boot-restSpring-Boot-Rest-API 
+###  spring-boot-restSpring-Boot-Rest-API 
 
 Le but de ce tutorial est de créer une application Spring Boot basée sur le système Restful pour la gestion des salariés.      
 Avant de commencer on doit introduire quelques notions :
@@ -7,6 +7,7 @@ Spring Boot est un conteneur qui comporte tous les projets Spring. Il reprend un
 ## II.	Rest API
 Les API Rest sont basées sur l’Hypertext Transfer Protocol (HTTP), un protocole qui définit la communication entre les différentes parties d’une application web. Un client lance une requête HTTP, et le serveur renvoie une réponse à travers plusieurs méthodes dont les plus utilisées sont : POST, GET, PUT et  DELETE.
 ## III.	Outils
+
 JDK 1.7+
 
 L'IDE préféré, on a chois de travailler avec Intellij IDEA
@@ -53,7 +54,7 @@ Dans Intellij IDEA : File puis new project et on choisit Maven,
 On obtient un projet Spring Boot avec un fichier de configuration maven : Pom.xml.
 
 
-      ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/3.png)
+   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/3.png)
 
  
 Maintenant on peut ajouter les dépendances nécessaires.

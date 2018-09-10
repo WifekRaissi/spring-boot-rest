@@ -8,10 +8,12 @@ Spring Boot consiste à créer des applications java en se concentrant sur le m�
 ## II.	Rest API
 Les API Rest sont basées sur l’ Hypertext Transfer Protocol (HTTP), un protocole qui définit la communication entre les différentes parties d’une application web. Un client lance une requête HTTP, et le serveur renvoie une réponse à travers plusieurs méthodes dont les plus utilisées sont : POST, GET, PUT et  DELETE.
 ## III.	Outils
-	Java Development Kit (JDK) 1.7+
-	L’environnement de développement préféré, on a choisi de travailler avec Intellij IDEA.
+	Java Development Kit (JDK) 1.7+
+        L’environnement de développement préféré, on a choisi de travailler avec Intellij IDEA.
 
 ## IV.	Création du projet :
+     ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/architecture.PNG)
+
 Une application Spring Boot est créée selon l’arborescence  de Maven ou Gradle, pour comprendre la différence entre les deux outils, cet article explique bien la différence.
 https://gradle.org/maven-vs-gradle/
 Durant ce projet on a utilisé Maven.
@@ -47,8 +49,7 @@ On doit mettre à jour le fichier Pom pour télécharger les dépendances (clic 
 On doit créer un package sous java puis une classe « MainApplicationClass.java »
 @SpringBootApplication : pour indiquer qu’il s’agit d’une application Spring Boot.
 Maintenant on peut exécuter l’application sur le port par défaut 8080.
-
-       ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/4.png)
+      ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/4.png)
 
 Jusqu’à maintenant l’adresse localhost:8080 ce qui est normal puisqu’on n’a pas encore créer le contrôleur. 
 Contrôleur :

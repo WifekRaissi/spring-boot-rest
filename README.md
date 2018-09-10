@@ -1,4 +1,4 @@
-## spring-boot-restSpring-Boot-Rest-API 
+##  spring-boot-restSpring-Boot-Rest-API 
 
 Le but de ce tutorial est de créer une application Spring Boot basée sur le système Restful pour la gestion des salariés.
 Avant de commencer on doit introduire quelques notions :
@@ -24,9 +24,11 @@ Pour créer le projet il y a trois façons :
 2.Command Line Tool (CLI)
 3. Maven with IDE : la méthode utilisée pour le présent projet :
 
-Dand Intellij IDEA : File puis new project et on choisit Maven
-
+Dand Intellij IDEA : File puis new project et on choisit Maven,
+<p align="center">
    ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/nouveauprojet.png)
+</p>
+
    
  Puis on remplit les informations demandées :
  GroupId : l’identifiant unique de l’organisation ou l’entreprise qui est généralement sous la forme : com.monentreprise.

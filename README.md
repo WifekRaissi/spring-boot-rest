@@ -15,7 +15,13 @@ L'IDE préféré, on a chois de travailler avec Intellij IDEA
 
 La figure suivante présente l'architecture du projet à réaliser durant ce tutorial.
 
+
+
+
    ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/architecture.PNG)
+   
+   
+   
 
 Une application Spring Boot peut être créée selon l’arborescence  de Maven ou Gradle. Pour comprendre la différence entre les deux outils, cet article explique bien la différence.
 https://gradle.org/maven-vs-gradle/
@@ -27,16 +33,25 @@ Pour créer le projet il y a trois façons :
 
 Dand Intellij IDEA : File puis new project et on choisit Maven,
 
+
+
    ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/nouveauprojet.png)
+   
 
    
  Puis on remplit les informations demandées :
  GroupId : l’identifiant unique de l’organisation ou l’entreprise qui est généralement sous la forme : com.monentreprise.
  ArtifactId :le nom unique du projet
  La version du projet.
-      ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/2.png)
+ 
+ 
+
+   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/2.png)
+   
 
 On obtient un projet Spring Boot avec un fichier de configuration maven : Pom.xml.
+
+
       ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/3.png)
 
  
@@ -112,7 +127,12 @@ public class MainApplicationClass {
 ```
 @SpringBootApplication : pour indiquer qu’il s’agit d’une application Spring Boot.
 Maintenant on peut exécuter l’application sur le port par défaut 8080. 
-               ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/4.png)
+
+
+
+   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/4.png)
+   
+   
 
 Jusqu’à maintenant l’adresse localhost:8080 affiche une erreur ce qui est normal puisqu’on n’a pas encore créer le contrôleur. 
 
@@ -141,6 +161,8 @@ public class SalariesController {
 @RequestMapping : Son rôle principal est de préciser quelle méthode doit être appelée pour une URI donnée. Elle peut être remplacée directement par l'une des annotation: @GetMapping, @PostMapping, DeleteMapping ou PutMapping.
 
 Maintenant si on exécute l'application le message défini dans le contrôleur sera affiché.
+
+
 
    ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/5.png)
 

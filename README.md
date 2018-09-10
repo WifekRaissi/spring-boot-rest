@@ -31,10 +31,10 @@ Pour créer le projet il y a trois façons :
 2.Command Line Tool (CLI)
 3. Maven with IDE : la méthode utilisée pour le présent projet :
 
-Dand Intellij IDEA : File puis new project et on choisit Maven,
+Dans Intellij IDEA : File puis new project et on choisit Maven,
 
-{sp} +
-{sp} +
+
+
 
    ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/nouveauprojet.png)
    

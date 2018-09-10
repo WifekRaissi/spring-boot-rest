@@ -4,15 +4,15 @@ Durant ce tutorial on est mené à créer une application Spring Boot basée sur
 Avant de commencer on doit définir quelques notions :
 ## I.	Spring Boot
 Spring Boot est un conteneur qui comporte tous les projets Spring. Il reprend une infrastructure similaire à un serveur d’application JEE avec un minimum ou presque sans configuration.
-Spring Boot consiste à créer des applications java en se concentrant sur le métier.
 ## II.	Rest API
 Les API Rest sont basées sur l’ Hypertext Transfer Protocol (HTTP), un protocole qui définit la communication entre les différentes parties d’une application web. Un client lance une requête HTTP, et le serveur renvoie une réponse à travers plusieurs méthodes dont les plus utilisées sont : POST, GET, PUT et  DELETE.
 ## III.	Outils
-	Java Development Kit (JDK) 1.7+
-        L’environnement de développement préféré, on a choisi de travailler avec Intellij IDEA.
+JDK 1.7+
+L'IDE préféré, on a chois de travailler avec Intellij IDEA
 
 ## IV.	Création du projet :
-     ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/architecture.PNG)
+
+      ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/architecture.PNG)
 
 Une application Spring Boot est créée selon l’arborescence  de Maven ou Gradle, pour comprendre la différence entre les deux outils, cet article explique bien la différence.
 https://gradle.org/maven-vs-gradle/

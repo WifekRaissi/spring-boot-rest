@@ -37,7 +37,52 @@ On obtient un projet Spring Boot avec un fichier de configuration maven : Pom.xm
 
  
 Maintenant on peut ajouter les dépendances nécessaires.
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.axeane</groupId>
+    <artifactId>SpringBootRest</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.4.RELEASE</version>
+    </parent>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>2.0.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+```
 
 
 <parent> : pour hériter les propriétés du spring-boot-starter-parent comme le numéro du port  et la configuration.
@@ -45,17 +90,9 @@ Maintenant on peut ajouter les dépendances nécessaires.
 <build> : contient les plugins.
 On doit mettre à jour le fichier Pom pour télécharger les dépendances (clic droit sur le projet créé ->Maven->Generate Sources and Update Folders).
 
-## Classe Main :
+# Main Class 
 On doit créer un package sous java puis une classe « MainApplicationClass.java »
-@SpringBootApplication : pour indiquer qu’il s’agit d’une application Spring Boot.
-Maintenant on peut exécuter l’application sur le port par défaut 8080.
-      ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/4.png)
-
-Jusqu’à maintenant l’adresse localhost:8080 ce qui est normal puisqu’on n’a pas encore créer le contrôleur. 
-Contrôleur :
-Le contrôleur reçoit les requêtes des clients et renvoi les réponses.
-SalariesController.java
-
+```
 package com.axeane;
 
 import org.springframework.boot.SpringApplication;
@@ -68,6 +105,30 @@ public class MainApplicationClass {
         SpringApplication.run(MainApplicationClass.class, args);
     }
 }
+```
+@SpringBootApplication : pour indiquer qu’il s’agit d’une application Spring Boot.
+Maintenant on peut exécuter l’application sur le port par défaut 8080.
+      ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/4.png)
+
+Jusqu’à maintenant l’adresse localhost:8080 ce qui est normal puisqu’on n’a pas encore créer le contrôleur. 
+Contrôleur :
+Le contrôleur reçoit les requêtes des clients et renvoi les réponses.
+#SalariesController.java
+```
+package com.axeane.controllers;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class SalariesController {
+
+    @RequestMapping("/")
+    public String index() {
+        return "votre controller SalariesController.java a été bien créé";
+    }
+}
+```
 
 
 

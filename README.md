@@ -166,7 +166,7 @@ Maintenant si on exécute l'application le message défini dans le contrôleur s
 
 
 
-   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/5.png)
+   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/6.png)
 
 
 ## Salarie.java

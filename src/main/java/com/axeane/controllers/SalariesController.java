@@ -18,6 +18,7 @@ public class SalariesController {
         this.salariesService = salariesService;
     }
 
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity addSalaries(@RequestBody Salarie salarie) {
@@ -52,7 +53,6 @@ public class SalariesController {
         return new ResponseEntity(HttpStatus.NOT_FOUND);
 
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteSalaries(@PathVariable("id") Long id) {

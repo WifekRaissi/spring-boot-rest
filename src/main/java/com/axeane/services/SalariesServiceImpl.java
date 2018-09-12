@@ -15,15 +15,6 @@ import java.util.stream.Stream;
 @Service
 public class SalariesServiceImpl implements SalariesService {
 
-    private static SalariesServiceImpl instance = null;
-
-    public static SalariesServiceImpl getInstance() {
-        if (instance == null) {
-            instance = new SalariesServiceImpl();
-        }
-        return instance;
-    }
-
     private Logger logger = LoggerFactory.getLogger(SalariesServiceImpl.class);
     private List<Salarie> salariess = Stream.of(
             new Salarie("ilyes", "raissi", new BigDecimal(444444), "Tunis"),

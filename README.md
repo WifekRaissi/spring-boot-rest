@@ -14,7 +14,10 @@ L'IDE préféré, on a choisi de travailler avec Intellij IDEA
 
 Maven ou Gradle
 
-## I.	Création du projet :
+# I. Implémentation d'une API Rest avec Spring Boot
+
+
+## 	Création du projet :
 
 La figure suivante présente l'architecture du projet à réaliser durant ce tutorial.
 

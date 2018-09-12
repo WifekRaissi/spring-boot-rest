@@ -10,7 +10,9 @@ Les API Rest sont basées sur l’Hypertext Transfer Protocol (HTTP), un protoco
 
 JDK 1.7+
 
-L'IDE préféré, on a chois de travailler avec Intellij IDEA
+L'IDE préféré, on a choisi de travailler avec Intellij IDEA
+
+Maven ou Gradle
 
 ## IV.	Création du projet :
 
@@ -28,9 +30,13 @@ Une application Spring Boot peut être créée selon l’arborescence  de Maven 
 https://gradle.org/maven-vs-gradle/
 Durant ce projet on a utilisé Maven.
 Pour créer le projet il y a trois façons : 
-1.Spring Boot Initializer : on a utilisé cette méthode durant le premier tutorial Spring Boot Kotlin    (https://medium.com/@wifekraissi/a-very-beginner-journey-with-kotlin-and-spring-boot-c46adeff9db8)
-2.Command Line Tool (CLI)
-3. Maven with IDE : la méthode utilisée pour le présent projet :
+
+1. Spring Boot Initializer : on a utilisé cette méthode durant le premier tutorial Spring Boot Kotlin   
+(https://medium.com/@wifekraissi/a-very-beginner-journey-with-kotlin-and-spring-boot-c46adeff9db8)
+
+2. Command Line Tool (CLI)
+
+3. A partir de l'IDE et Maven: la méthode utilisée pour le présent projet :
 
 Dans Intellij IDEA : File puis new project et on choisit Maven,
 
@@ -42,8 +48,11 @@ Dans Intellij IDEA : File puis new project et on choisit Maven,
 
    
  Puis on remplit les informations demandées :
+ 
  GroupId : l’identifiant unique de l’organisation ou l’entreprise qui est généralement sous la forme : com.monentreprise.
+ 
  ArtifactId :le nom unique du projet
+ 
  La version du projet.
  
  
@@ -106,9 +115,12 @@ Maintenant on peut ajouter les dépendances nécessaires.
 ```
 
 
-<parent> : pour hériter les propriétés du spring-boot-starter-parent comme le numéro du port  et la configuration.
-<dependencies> : contient toutes les librairies dont dépend le projet.
-<build> : contient les plugins.
+ <parent> : pour hériter les propriétés du spring-boot-starter-parent comme le numéro du port  et la configuration.
+   
+ <dependencies> : contient toutes les librairies dont dépend le projet.
+   
+ <build> : contient les plugins.
+   
 On doit mettre à jour le fichier Pom pour télécharger les dépendances (clic droit sur le projet créé ->Maven->Generate Sources and Update Folders).
 
 # Main Class 
@@ -128,6 +140,7 @@ public class MainApplicationClass {
 }
 ```
 @SpringBootApplication : pour indiquer qu’il s’agit d’une application Spring Boot.
+
 Maintenant on peut exécuter l’application sur le port par défaut 8080. 
 
 
@@ -139,7 +152,7 @@ Maintenant on peut exécuter l’application sur le port par défaut 8080.
 Jusqu’à maintenant l’adresse localhost:8080 affiche une erreur ce qui est normal puisqu’on n’a pas encore créer le contrôleur. 
 
 ## Contrôleur:
-Le contrôleur asssure la communication entre l'application et les clients, il reçoit les requêtes  et renvoi les réponses.
+Le contrôleur asssure la communication entre l'application et les clients, il reçoit les requêtes  et renvoie les réponses.
 
 ## SalariesController.java
 ```
@@ -160,13 +173,15 @@ public class SalariesController {
 
 
 @RestController : indique qu’il s’agit un controller, elle combine les deux annotations : @Controller et @ResponseBody.
-@RequestMapping : Son rôle principal est de préciser quelle méthode doit être appelée pour une URI donnée. Elle peut être remplacée directement par l'une des annotation: @GetMapping, @PostMapping, DeleteMapping ou PutMapping.
+
+@RequestMapping : Son rôle principal est de préciser quelle méthode doit être appelée pour une URI donnée. Elle peut être remplacée 
+directement par l'une des annotation: @GetMapping, @PostMapping, DeleteMapping ou PutMapping.
 
 Maintenant si on exécute l'application le message défini dans le contrôleur sera affiché.
 
 
 
-   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/5.png)
+   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/6.png)
 
 
 ## Salarie.java
@@ -393,6 +408,7 @@ public class SalariesServiceImpl implements SalariesService {
  
  ### SalariesController
  On peut maintenant compléter SalariesController par les différentes requêtes HTTP en injectant la classe service.
+ 
  ```
 package com.axeane.controllers;
 
@@ -462,7 +478,7 @@ public class SalariesController {
 }
 ```
 @GetMapping :utilisé pour récupérer des informations à partir d'un serveur sans rien modifier. 
-@PostMapping :utilisé pour envoyer des donées au serveur.
+@PostMapping :utilisé pour envoyer des données au serveur.
 @PutMapping : utilisé pour modifier des données.
 @DeleteMapping :utilisé pour supprimer des données.
 @PathVariable: utilisé pour extraire des données à partir de l'URI.

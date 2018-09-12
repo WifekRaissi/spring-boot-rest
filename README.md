@@ -1014,6 +1014,7 @@ Pour simplifier l'utilisation de Swagger on peut autoriser une interface graphiq
 L'interaction entre l'utilisateur et l'API est maintenant plus facile à partir de l'URL suivante http://localhost:8080/swagger-ui.html.
 
 
+
    ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/swagger%20ui.PNG)
    
 

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface SalariesService {
 
-    void addsalarie(Salarie salarie);
+    Salarie addsalarie(Salarie salarie);
 
     List<Salarie> getListSalaries();
 

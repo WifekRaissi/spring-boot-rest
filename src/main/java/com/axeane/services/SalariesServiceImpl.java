@@ -18,13 +18,7 @@ import java.util.stream.Stream;
 
 @Service
 public class SalariesServiceImpl implements SalariesService {
-    @Bean
-    public Jackson2ObjectMapperBuilderCustomizer problemObjectMapperModules() {
-        return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.modules(
-                new ProblemModule(),
-                new ConstraintViolationProblemModule()
-        );
-    }
+
     private Logger logger = LoggerFactory.getLogger(SalariesServiceImpl.class);
     private List<Salarie> salariess = Stream.of(
             new Salarie("ilyes", "raissi", new BigDecimal(444444), "Tunis"),
@@ -34,8 +28,9 @@ public class SalariesServiceImpl implements SalariesService {
             .collect(Collectors.toList());
 
     @Override
-    public void addsalarie(Salarie salarie) {
+    public Salarie addsalarie(Salarie salarie) {
         salariess.add(salarie);
+        return salarie;
     }
 
     @Override

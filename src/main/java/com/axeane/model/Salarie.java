@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Salarie {
     private long id;
-    private static final AtomicInteger count = new AtomicInteger(-1);
+    private static final AtomicInteger count = new AtomicInteger(-0);
 
     @NotEmpty
     @NotNull

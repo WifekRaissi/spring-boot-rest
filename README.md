@@ -2,11 +2,11 @@
 
 Le but de ce tutorial est de créer une application Spring Boot basée sur le système Restful pour la gestion des salariés.      
 Avant de commencer on doit introduire quelques notions :
-## I.	Spring Boot
+## 	Spring Boot
 Spring Boot est un conteneur qui comporte tous les projets Spring. Il reprend une infrastructure similaire à un serveur d’application JEE avec un minimum ou presque sans configuration.
-## II.	Rest API
+## 	Rest API
 Les API Rest sont basées sur l’Hypertext Transfer Protocol (HTTP), un protocole qui définit la communication entre les différentes parties d’une application web. Un client lance une requête HTTP, et le serveur renvoie une réponse à travers plusieurs méthodes dont les plus utilisées sont : POST, GET, PUT et  DELETE.
-## III.	Outils
+##   Outils
 
 JDK 1.7+
 
@@ -14,7 +14,7 @@ L'IDE préféré, on a choisi de travailler avec Intellij IDEA
 
 Maven ou Gradle
 
-## IV.	Création du projet :
+## I.	Création du projet :
 
 La figure suivante présente l'architecture du projet à réaliser durant ce tutorial.
 
@@ -523,7 +523,7 @@ Pour tester les différentes requêtes il suffit d’utiliser Postman.
    
    
 
-# Validation des données
+# II. Validation des données
   En envoyant des requêtes au serveur on attend des formats bien définis des données récupéres, mais pour différentes raisons on peut recevoir des résultats qui ne respectent pas les formats prédéfinis ou bien des erreurs qui ne seront pas compris par l'utilisateur.
 d'où le besoin d'implémenter des méthodes qui gérent les erreurs et surtout d'indiquer avec précision d'où vient l'exception avec un message clair.
 
@@ -708,7 +708,7 @@ On peut maintenant remarquer la différence en testant avec Postman:
    ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/validation.PNG)
 
 
-# Tests
+# III. Tests
 dans ce tutorial on s'intéresse aux tests unitaires et d'integration:
 ## Test unitaire
 Avec les tests unitaires On vérifie le bon fonctionnement d'une partie précise d'un logiciel ou d'une portion d'un programme. Chaque classe doit être testé en isolation complète  

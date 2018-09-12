@@ -523,17 +523,189 @@ Pour tester les différentes requêtes il suffit d’utiliser Postman.
    
    
 
+# Validation des données
+  En envoyant des requêtes au serveur on attend des formats bien définis des données récupéres, mais pour différentes raisons on peut recevoir des résultats qui ne respectent pas les formats prédéfinis ou bien des erreurs qui ne seront pas compris par l'utilisateur.
+d'où le besoin d'implémenter des méthodes qui gérent les erreurs et surtout d'indiquer avec précision d'où vient l'exception avec un message clair.
+
+
+## Implémentation des validateurs
+
+### Salaries.java
+   @NotEmpty:pour indiquer que le champ ne doit pas être vide
+   @NotNull:pour indiquer que la valeur ne doit pas être vide
+  @Size: pour indiquer la longueur minimale et/ou maximale d'une chaîne avec et message d'erreur au de violation de la contrainte.
+  
+  ```
+    @NotEmpty
+    @NotNull
+    private String nom;
+
+    @NotEmpty
+    @NotNull
+    private String prenom;
+
+    @NotNull
+    private BigDecimal salaire;
+
+    @NotEmpty
+    @NotNull
+    @Size(max = 256, message = "address should have maximum 256 characters")
+    private String adresse;
+
+  ```
+On peut trouver plus d'annotations de validation si on a besoin dans la liste suivante:
+DecimalMax
+DecimalMin
+Digits
+Email
+Future
+FutureOrPresent
+Max
+Min
+Negative
+NegativeOrZero
+NotBlank
+NotEmpty
+NotNull
+Null
+Past
+PastOrPresent
+Pattern
+Positive
+PositiveOrZero
    
 
-   
+Pour autoriser la validation, il faut ajouter @Valid avec @RequestBody.
+
+```
+ public ResponseEntity addSalaries(@Valid @RequestBody Salarie salarie) {
+        salariesService.addsalarie(salarie);
+        return new ResponseEntity<>(salarie, HttpStatus.CREATED);
+    }
+```
+
+Maintenant si on execute une requête Post avec des données qui ne respectent pas le format on obtient un status "404 BAD Reques".
+On sait qu'il s'agit d'une mauvaise requête mais on ne sait pas d'où vient exactement le problème.
+
+## Personnalisation de la réponse de validation
+
+On peut définir une réponse personnalisée en utilisant l'API de Zalando https://github.com/zalando/problem-spring-web 
+```
+package com.salaries.demo.utils;
+
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.zalando.problem.AbstractThrowableProblem;
+import org.zalando.problem.ProblemModule;
+import org.zalando.problem.Status;
+import org.zalando.problem.validation.ConstraintViolationProblemModule;
+
+import java.net.URI;
+import java.util.Date;
+
+@ResponseStatus(value = HttpStatus.FORBIDDEN, reason = "Couldn't create document")
+
+public class SalarieException extends AbstractThrowableProblem {
+    @Bean
+    public Jackson2ObjectMapperBuilderCustomizer problemObjectMapperModules() {
+        return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.modules(
+                new ProblemModule(),
+                new ConstraintViolationProblemModule()
+        );
+    }
+
+    private static final long serialVersionUID = 1L;
+    private static final URI TYPE = URI.create("https://salaries.org/failed");
+    private Date timestamp;
+    private String details;
+
+    public SalarieException(Date timestamp, final String title, String details) {
+        super(TYPE, title, Status.FORBIDDEN);
+        this.timestamp = timestamp;
+        this.details = details;
+    }
+
+    public SalarieException() {
+        super(TYPE, "Salaried not found", Status.NOT_FOUND);
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
 
 
+}
+```
+## ControllerAdvice
+@ControllerAdvice: c'est une annotation spring qui permet d'implémenter un code qui sera appliqué sur toutes les classes de type contrôleur.
+CustomizedResponseEntityExceptionHandler.java 
+```
+
+import com.axeane.utils.ExceptionResponse;
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+
+import org.springframework.web.bind.annotation.*;
+import org.zalando.problem.ProblemModule;
+import org.zalando.problem.spring.web.advice.ProblemHandling;
+import org.zalando.problem.validation.ConstraintViolationProblemModule;
+
+import javax.servlet.http.HttpServletRequest;
+
+@ControllerAdvice()
+public class CustomizedResponseEntityExceptionHandler implements ProblemHandling {
+    @Bean
+    public Jackson2ObjectMapperBuilderCustomizer problemObjectMapperModules() {
+        return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.modules(
+                new ProblemModule(),
+                new ConstraintViolationProblemModule()
+        );
+    }
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public @ResponseBody
+    ExceptionResponse badRequest(final ExceptionResponse exception, final HttpServletRequest request) {
+        ExceptionResponse error = new ExceptionResponse();
+        error.setMessage(exception.getMessage());
+        return error;
+    }
 
 
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public @ResponseBody
+    ExceptionResponse notFoundRequest(final ExceptionResponse exception, final HttpServletRequest request) {
+        ExceptionResponse error = new ExceptionResponse();
+        error.setMessage(exception.getMessage());
+        return error;
+    }
 
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public @ResponseBody
+    ExceptionResponse handleException(final Exception exception, final HttpServletRequest request) {
+        ExceptionResponse error = new ExceptionResponse();
+        error.setMessage(exception.getMessage());
+        return error;
+    }
+}
+```
+On peut maintenant remarquer la différence en testant avec Postman:
 
-
-
+   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/validation.PNG)
 
 
 

@@ -4,7 +4,11 @@ package com.axeane.services;
 import com.axeane.model.Salarie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import org.zalando.problem.ProblemModule;
+import org.zalando.problem.validation.ConstraintViolationProblemModule;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,7 +18,13 @@ import java.util.stream.Stream;
 
 @Service
 public class SalariesServiceImpl implements SalariesService {
-
+    @Bean
+    public Jackson2ObjectMapperBuilderCustomizer problemObjectMapperModules() {
+        return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.modules(
+                new ProblemModule(),
+                new ConstraintViolationProblemModule()
+        );
+    }
     private Logger logger = LoggerFactory.getLogger(SalariesServiceImpl.class);
     private List<Salarie> salariess = Stream.of(
             new Salarie("ilyes", "raissi", new BigDecimal(444444), "Tunis"),

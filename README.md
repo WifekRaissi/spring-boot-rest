@@ -708,4 +708,275 @@ On peut maintenant remarquer la différence en testant avec Postman:
    ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/validation.PNG)
 
 
+# Tests
+dans ce tutorial on s'intéresse aux tests unitaires et d'integration:
+## Test unitaire
+Avec les tests unitaires On vérifie le bon fonctionnement d'une partie précise d'un logiciel ou d'une portion d'un programme. Chaque classe doit être testé en isolation complète  
 
+## SalariesServiceImplTest.java
+
+```
+
+import com.axeane.model.Salarie;
+import org.assertj.core.api.Assertions;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.*;
+
+public class SalariesServiceImplTest {
+
+    private SalariesServiceImpl salariesServiceImpl;
+
+    @Before
+    public void setUp() {
+        salariesServiceImpl = new SalariesServiceImpl();
+    }
+
+    @Test
+    public void addSalarie() throws Exception {
+        List<Salarie> salaries = salariesServiceImpl.getListSalaries();
+        int sizeBefore = salaries.size();
+        Salarie salarie = new Salarie("amira", "raissi", new BigDecimal(444444), "Tunis");
+        salariesServiceImpl.addsalarie(salarie);
+        int sizeAfter = sizeBefore + 1;
+        assertThat(sizeAfter, is(sizeBefore + 1));
+        Salarie salarie1 = salaries.get(salaries.size() - 1);
+        assertEquals("amira", salarie1.getNom());
+    }
+
+    @Test
+    public void addSalarieNotEmpty() throws Exception {
+        Salarie salarie = new Salarie("amira", "raissi", new BigDecimal(444444), "Tunis");
+        salariesServiceImpl.addsalarie(salarie);
+        assertFalse(salarie.getNom().isEmpty());
+        assertFalse(salarie.getPrenom().isEmpty());
+        assertFalse(salarie.getAdresse().isEmpty());
+    }
+
+    @Test
+    public void addSalarieNotNull() throws Exception {
+        Salarie salarie = new Salarie("amira", "raissi", new BigDecimal(444444), "Tunis");
+        salariesServiceImpl.addsalarie(salarie);
+        assertNotNull(salarie.getNom());
+        assertNotNull(salarie.getPrenom());
+        assertNotNull(salarie.getAdresse());
+        assertNotNull(salarie.getSalaire());
+        assertFalse(salarie.getAdresse().length() > 256);
+    }
+
+    @Test
+    public void testAdresseLengh() throws Exception {
+        Salarie salarie = new Salarie("amira", "raissi", new BigDecimal(444444), "Tunis");
+        salariesServiceImpl.addsalarie(salarie);
+    }
+
+    @Test
+    public void getListSalaries() throws Exception {
+        List<Salarie> salaries = salariesServiceImpl.getListSalaries();
+        int sizeBefore = salaries.size();
+        Salarie salarie = new Salarie("ilyes", "raissi", new BigDecimal(444444), "Tunis");
+        salaries.add(salarie);
+        int sizeAfter = sizeBefore + 1;
+        assertFalse(salaries.isEmpty());
+        assertThat(sizeAfter, is(sizeBefore + 1));
+        Assertions.assertThat(salaries).contains(salarie);
+    }
+
+    @Test
+    public void findSalariedById() throws Exception {
+        List<Salarie> salaries = salariesServiceImpl.getListSalaries();
+        System.out.println(salaries.toString());
+        Salarie salarie = new Salarie("ilyes", "raissi", new BigDecimal(444444), "Tunis");
+        salaries.add(salarie);
+        Salarie salarie1 = salariesServiceImpl.findSalariedById((long) (salaries.size()));
+
+        assertThat(salarie1.getId(), is(salarie.getId()));
+        assertThat(salarie1.getNom(), is(salarie.getNom()));
+        assertThat(salarie1.getPrenom(), is(salarie.getPrenom()));
+        assertThat(salarie1.getAdresse(), is(salarie.getAdresse()));
+    }
+
+    @Test
+    public void deleteSalaried() throws Exception {
+        List<Salarie> salaries = salariesServiceImpl.getListSalaries();
+        int sizeBefore = salaries.size();
+        salariesServiceImpl.deleteSalaried((long) salaries.size());
+        int sizeAfter = salaries.size();
+        assertThat(sizeAfter, is(sizeBefore - 1));
+    }
+
+    @Test
+    public void updateSalarie() throws Exception {
+        List<Salarie> salaries = salariesServiceImpl.getListSalaries();
+        Salarie salarie = new Salarie("raissi", "abir", new BigDecimal(444444), "Tunis");
+        salariesServiceImpl.addsalarie(salarie);
+        Salarie salarie2 = new Salarie((long) (salaries.size()), "wifek", "wifek", new BigDecimal(444444), "Tunis");
+        salariesServiceImpl.updateSalarie(salarie2);
+        assertThat(salaries.get(salaries.size() - 1).getPrenom(), is("wifek"));
+        assertThat(salaries.get(salaries.size() - 1).getNom(), is("wifek"));
+    }
+}
+```
+## SalariesControllerTest.java
+```
+import com.axeane.model.Salarie;
+import com.axeane.services.SalariesService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import static java.util.Collections.singletonList;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+
+@RunWith(SpringRunner.class)
+@WebMvcTest(SalariesController.class)
+public class SalariesControllerTest {
+    @Autowired
+    MockMvc mockMvc;
+    @MockBean
+    @Autowired
+    SalariesService salarieServiceMock;
+    @Autowired
+    ObjectMapper objectMapper;
+
+    @Test
+    public void addSalarie() throws Exception {
+        Salarie salarie = new Salarie("ilyes", "raissi", new BigDecimal(444444), "Tunis");
+        given(salarieServiceMock.addsalarie(salarie)).willReturn(salarie);
+        mockMvc.perform(post("/salaries")
+                .contentType(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(salarie)))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.nom").value("ilyes"))
+                .andExpect(jsonPath("$.prenom").value("raissi"))
+                .andExpect(jsonPath("$.salaire").value(444444))
+                .andExpect(jsonPath("$.adresse").value("Tunis"));
+        verify(salarieServiceMock, times(1)).addsalarie(salarie);
+        verifyNoMoreInteractions(salarieServiceMock);
+    }
+
+    @Test
+    public void getSalaries() throws Exception {
+        Salarie salarie = new Salarie();
+        salarie.setNom("Amine");
+        List<Salarie> salaries = singletonList(salarie);
+        given(salarieServiceMock.getListSalaries()).willReturn(salaries);
+        mockMvc.perform(get("/salaries")
+                .contentType(APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].nom").value(salarie.getNom()));
+    }
+
+    @Test
+    public void getSalariesById() throws Exception {
+        Salarie salarie = new Salarie("ilyes", "raissi", new BigDecimal(444444), "Tunis");
+        given(salarieServiceMock.findSalariedById(salarie.getId())).willReturn(salarie);
+        mockMvc.perform(get("/salaries/" + salarie.getId())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.nom", is(salarie.getNom())));
+        verify(salarieServiceMock, times(1)).findSalariedById(salarie.getId());
+        verifyNoMoreInteractions(salarieServiceMock);
+    }
+
+    @Test
+    public void updateSalaries() throws Exception {
+        Salarie salarie = new Salarie("ilyes", "raissi", new BigDecimal(444444), "Tunis");
+        when(salarieServiceMock.findSalariedById(salarie.getId())).thenReturn(salarie);
+        doNothing().when(salarieServiceMock).updateSalarie(salarie);
+        mockMvc.perform(
+                put("/salaries")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(salarie)))
+                .andExpect(status().isOk());
+        verify(salarieServiceMock, times(1)).findSalariedById(salarie.getId());
+        verify(salarieServiceMock, times(1)).updateSalarie(salarie);
+        verifyNoMoreInteractions(salarieServiceMock);
+    }
+
+    @Test
+    public void deleteSalaries() throws Exception {
+        Salarie salarie = new Salarie("ilyes", "raissi", new BigDecimal(444444), "Tunis");
+        when(salarieServiceMock.findSalariedById(salarie.getId())).thenReturn(salarie);
+        doNothing().when(salarieServiceMock).deleteSalaried(salarie.getId());
+        mockMvc.perform(
+                delete("/salaries/{id}", salarie.getId()))
+                .andExpect(status().isOk());
+        verify(salarieServiceMock, times(1)).findSalariedById(salarie.getId());
+        verify(salarieServiceMock, times(1)).deleteSalaried(salarie.getId());
+        verifyNoMoreInteractions(salarieServiceMock);
+    }
+}
+```
+## Tests d'intégration
+
+Les tests d'intégration Couvre toute l’application. Chacun des modules indépendants du logiciel est assemblé et testé dans l'ensemble
+  ## SalariesControllerIntegrationTest.java
+  
+  
+  ```
+  
+import com.axeane.MainApplicationClass;
+
+import com.axeane.model.Salarie;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import java.math.BigDecimal;
+
+import static org.junit.Assert.assertEquals;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = MainApplicationClass.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class SalariesControllerIntegrationTest {
+
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    @Test
+    public void addSalarie() {
+        ResponseEntity<Salarie> responseEntity =
+                restTemplate.postForEntity("/salaries", new Salarie("ilyes", "raissi", new BigDecimal(444444), "Tunis"), Salarie.class);
+        Salarie salarie = responseEntity.getBody();
+        assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
+        assert salarie != null;
+        assertEquals("ilyes", salarie.getNom());
+    }
+}
+  ```
+  
+  
+  

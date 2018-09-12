@@ -170,7 +170,8 @@ Maintenant si on exécute l'application le message défini dans le contrôleur s
 
 
 ## Salarie.java
-Le but du contrôleur SalariesController est de gérer les requêtes concernant les salaries. Pour ce fait on doit créer une classe Salarie
+Le but de cette application est de gérer les différentes opérations concernant les salariés. Pour ce fait on doit créer une classe Salarie qui regroupe les propriétes d'un salarié
+
 ```
 package com.axeane.model;
 
@@ -322,6 +323,7 @@ public interface SalariesService {
 
 ```
 ### SalariesServiceImpl
+La classe ServiceImpl doit être un bean spring à travers l'une des annotations  @Service ou @Component.
 ```
 package com.axeane.services;
 
@@ -339,15 +341,6 @@ import java.util.stream.Stream;
 
 @Service
 public class SalariesServiceImpl implements SalariesService {
-
-    private static SalariesServiceImpl instance = null;
-
-    public static SalariesServiceImpl getInstance() {
-        if (instance == null) {
-            instance = new SalariesServiceImpl();
-        }
-        return instance;
-    }
 
     private Logger logger = LoggerFactory.getLogger(SalariesServiceImpl.class);
     private List<Salarie> salariess = Stream.of(
@@ -399,7 +392,7 @@ public class SalariesServiceImpl implements SalariesService {
  
  
  ### SalariesController
- 
+ On peut maintenant compléter SalariesController par les différentes requêtes HTTP en injectant la classe service.
  ```
 package com.axeane.controllers;
 
@@ -468,6 +461,61 @@ public class SalariesController {
     }
 }
 ```
+@GetMapping :utilisé pour récupérer des informations à partir d'un serveur sans rien modifier. 
+@PostMapping :utilisé pour envoyer des donées au serveur.
+@PutMapping : utilisé pour modifier des données.
+@DeleteMapping :utilisé pour supprimer des données.
+@PathVariable: utilisé pour extraire des données à partir de l'URI.
+
+## Tests:
+Pour tester les différentes requêtes il suffit d’utiliser Postman.
+
+
+
+
+
+   ## Get
+
+   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/get.PNG)
+   
+   
+   
+   
+   
+   ## Post
+   
+   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/post.PNG)
+   
+   
+   
+   
+   
+   
+   ## Update
+   
+   
+   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/put.PNG)
+   
+   
+   
+   
+   
+   ## Delete
+   
+   
+   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/delete.PNG)
+   
+   
+
+   
+
+   
+
+
+
+
+
+
 
 
 

@@ -152,7 +152,7 @@ Maintenant on peut exécuter l’application sur le port par défaut 8080.
    
    
 
-Jusqu’à maintenant l’adresse localhost:8080 affiche une erreur ce qui est normal puisqu’on n’a pas encore créer le contrôleur. 
+Jusqu’à maintenant l’adresse localhost:8080 affiche une erreur ce qui est normal puisqu’on n’a pas encore créé le contrôleur. 
 
 ## Contrôleur:
 Le contrôleur asssure la communication entre l'application et les clients, il reçoit les requêtes  et renvoie les réponses.
@@ -178,7 +178,7 @@ public class SalariesController {
 @RestController : indique qu’il s’agit un controller, elle combine les deux annotations : @Controller et @ResponseBody.
 
 @RequestMapping : Son rôle principal est de préciser quelle méthode doit être appelée pour une URI donnée. Elle peut être remplacée 
-directement par l'une des annotation: @GetMapping, @PostMapping, DeleteMapping ou PutMapping.
+directement par l'une des annotation: @GetMapping, @PostMapping, @DeleteMapping ou @PutMapping.
 
 Maintenant si on exécute l'application le message défini dans le contrôleur sera affiché.
 
@@ -206,23 +206,12 @@ public class Salarie {
     private long id;
     private static final AtomicInteger count = new AtomicInteger(-1);
 
-    @NotEmpty
-    @NotNull
     private String nom;
-
-    @NotEmpty
-    @NotNull
     private String prenom;
-
-    @NotNull
     private BigDecimal salaire;
-
-    @NotEmpty
-    @NotNull
-    @Size(max = 256, message = "address should have maximum 256 characters")
     private String adresse;
 
-    public long getId() {
+   public long getId() {
         return id;
     }
 
@@ -480,11 +469,15 @@ public class SalariesController {
     }
 }
 ```
-@GetMapping :utilisé pour récupérer des informations à partir d'un serveur sans rien modifier. 
-@PostMapping :utilisé pour envoyer des données au serveur.
-@PutMapping : utilisé pour modifier des données.
-@DeleteMapping :utilisé pour supprimer des données.
-@PathVariable: utilisé pour extraire des données à partir de l'URI.
+@GetMapping :utilisée pour récupérer des informations à partir d'un serveur sans rien modifier. 
+
+@PostMapping :utilisée pour envoyer des données au serveur.
+
+@PutMapping : utilisée pour modifier des données.
+
+@DeleteMapping :utilisée pour supprimer des données.
+
+@PathVariable: utilisée pour extraire des données à partir de l'URI.
 
 ## Tests:
 Pour tester les différentes requêtes il suffit d’utiliser Postman.
@@ -527,16 +520,19 @@ Pour tester les différentes requêtes il suffit d’utiliser Postman.
    
 
 # II. Validation des données
-  En envoyant des requêtes au serveur on attend des formats bien définis des données récupéres, mais pour différentes raisons on peut recevoir des résultats qui ne respectent pas les formats prédéfinis ou bien des erreurs qui ne seront pas compris par l'utilisateur.
+ 
+ En envoyant des requêtes au serveur on attend des formats bien définis des données récupérées, mais pour différentes raisons on peut recevoir des résultats qui ne respectent pas les formats prédéfinis ou bien des erreurs qui ne seront pas comprises par l'utilisateur.
 d'où le besoin d'implémenter des méthodes qui gérent les erreurs et surtout d'indiquer avec précision d'où vient l'exception avec un message clair.
 
 
 ## Implémentation des validateurs
 
 ### Salaries.java
-   @NotEmpty:pour indiquer que le champ ne doit pas être vide
-   @NotNull:pour indiquer que la valeur ne doit pas être vide
-  @Size: pour indiquer la longueur minimale et/ou maximale d'une chaîne avec et message d'erreur au de violation de la contrainte.
+   @NotEmpty:pour indiquer que le champ ne doit pas être vide.
+   
+   @NotNull:pour indiquer que la valeur ne doit pas être null.
+   
+   @Size: pour indiquer la longueur minimale et/ou maximale d'une chaîne avec et message d'erreur au de violation de la contrainte.
   
   ```
     @NotEmpty
@@ -587,7 +583,7 @@ Pour autoriser la validation, il faut ajouter @Valid avec @RequestBody.
     }
 ```
 
-Maintenant si on execute une requête Post avec des données qui ne respectent pas le format on obtient un status "404 BAD Reques".
+Maintenant si on execute une requête Post avec des données qui ne respectent pas le format on obtient un status "404 BAD Request".
 On sait qu'il s'agit d'une mauvaise requête mais on ne sait pas d'où vient exactement le problème.
 
 ## Personnalisation de la réponse de validation
@@ -655,7 +651,8 @@ public class SalarieException extends AbstractThrowableProblem {
 ```
 ## ControllerAdvice
 @ControllerAdvice: c'est une annotation spring qui permet d'implémenter un code qui sera appliqué sur toutes les classes de type contrôleur.
-CustomizedResponseEntityExceptionHandler.java 
+
+## CustomizedResponseEntityExceptionHandler.java 
 ```
 
 import com.axeane.utils.ExceptionResponse;
@@ -712,9 +709,10 @@ On peut maintenant remarquer la différence en testant avec Postman:
 
 
 # III. Tests
+
 dans ce tutorial on s'intéresse aux tests unitaires et d'integration:
-## Test unitaire
-Avec les tests unitaires On vérifie le bon fonctionnement d'une partie précise d'un logiciel ou d'une portion d'un programme. Chaque classe doit être testé en isolation complète  
+## III.1 Test unitaire
+Avec les tests unitaires On vérifie le bon fonctionnement d'une partie précise d'un logiciel ou d'une portion d'un programme. Chaque classe doit être testée en isolation complète  
 
 ## SalariesServiceImplTest.java
 
@@ -938,9 +936,10 @@ public class SalariesControllerTest {
     }
 }
 ```
-## Tests d'intégration
+## III.2 Tests d'intégration
 
-Les tests d'intégration Couvre toute l’application. Chacun des modules indépendants du logiciel est assemblé et testé dans l'ensemble
+Les tests d'intégration Couvrent toute l’application. Chacun des modules indépendants du logiciel est assemblé et testé dans l'ensemble
+
   ## SalariesControllerIntegrationTest.java
   
   
@@ -981,8 +980,10 @@ public class SalariesControllerIntegrationTest {
 }
   ```
 # IV. Intégration du Swagger  
-Swagger nous permet de décrire la structure de l'API créée pour faciliter pour faciliter sa consommation.
-Pour Commencer on doit ajouter les dépendances:
+
+Swagger nous permet de décrire la structure de l'API créée pour faciliter sa consommation.
+
+Pour Commencer on doit ajouter la  dépendance suivante:
 
 ```
         <dependency>

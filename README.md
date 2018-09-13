@@ -980,6 +980,43 @@ public class SalariesControllerIntegrationTest {
     }
 }
   ```
-  
+# IV. Intégration du Swagger  
+Swagger nous permet de décrire la structure de l'API créée pour faciliter pour faciliter sa consommation.
+Pour Commencer on doit ajouter les dépendances:
+
+```
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.6.1</version>
+            <scope>compile</scope>
+        </dependency>
+  ```
+        
+On peut vérifier son fonctionnement en visitant l'URL: http://localhost:8080/v2/api-docs 
+              
+   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/sawagger.PNG)
+
+
+
+Pour simplifier l'utilisation de Swagger on peut autoriser une interface graphique par l'ajout de la dépendance suivante:      
+```
+          <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.6.1</version>
+            <scope>compile</scope>
+        </dependency>
+  ```
+   
+
+
+L'interaction entre l'utilisateur et l'API est maintenant plus facile à partir de l'URL suivante http://localhost:8080/swagger-ui.html.
+
+
+
+   ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/swagger%20ui.PNG)
+   
+
   
   

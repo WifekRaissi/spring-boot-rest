@@ -1018,6 +1018,10 @@ L'interaction entre l'utilisateur et l'API est maintenant plus facile à partir 
 
    ![alt text](https://github.com/WifekRaissi/spring-boot-rest/blob/master/src/main/resources/images/swagger%20ui.PNG)
    
-
+   
+## A noter:
+ Ce tutorial est l'introduction à une série de tutoriaux pour Spring Boot. Dans le tutorial suivant on va commencer Spring Data par l'intégration de MySQL avec cette même application.
+ 
+ Plus de détails dans: https://github.com/WifekRaissi/spring-boot-rest-data-mysql
   
   

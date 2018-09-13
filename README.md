@@ -118,11 +118,11 @@ Maintenant on peut ajouter les dépendances nécessaires.
 ```
 
 
- <parent> : pour hériter les propriétés du spring-boot-starter-parent comme le numéro du port  et la configuration.
+   <parent> : pour hériter les propriétés du spring-boot-starter-parent comme le numéro du port  et la configuration.
    
- <dependencies> : contient toutes les librairies dont dépend le projet.
+   <dependencies> : contient toutes les librairies dont dépend le projet.
    
- <build> : contient les plugins.
+   <build> : contient les plugins.
    
 On doit mettre à jour le fichier Pom pour télécharger les dépendances (clic droit sur le projet créé ->Maven->Generate Sources and Update Folders).
 

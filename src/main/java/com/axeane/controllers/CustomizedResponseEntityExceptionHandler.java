@@ -1,27 +1,14 @@
 package com.axeane.controllers;
 
 import com.axeane.utils.ExceptionResponse;
-import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
-
 import org.springframework.web.bind.annotation.*;
-import org.zalando.problem.ProblemModule;
 import org.zalando.problem.spring.web.advice.ProblemHandling;
-import org.zalando.problem.validation.ConstraintViolationProblemModule;
 
 import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice()
 public class CustomizedResponseEntityExceptionHandler implements ProblemHandling {
-    @Bean
-    public Jackson2ObjectMapperBuilderCustomizer problemObjectMapperModules() {
-        return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.modules(
-                new ProblemModule(),
-                new ConstraintViolationProblemModule()
-        );
-    }
-
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public @ResponseBody
     ExceptionResponse badRequest(final ExceptionResponse exception, final HttpServletRequest request) {
@@ -29,7 +16,6 @@ public class CustomizedResponseEntityExceptionHandler implements ProblemHandling
         error.setMessage(exception.getMessage());
         return error;
     }
-
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public @ResponseBody

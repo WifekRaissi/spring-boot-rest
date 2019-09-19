@@ -3,7 +3,7 @@
 Le but de ce tutorial est de créer une application Spring Boot basée sur le système Restful pour la gestion des salariés.      
 Avant de commencer on doit introduire quelques notions :
 ## 	Spring Boot
-Spring Boot est un conteneur qui comporte tous les projets Spring. Il reprend une infrastructure similaire à un serveur d’application JEE avec un minimum ou presque sans configuration.
+Spring Boot est un projet qui facilite la configuration d’un projet Spring.
 ## 	Rest API
 Les API Rest sont basées sur l’Hypertext Transfer Protocol (HTTP), un protocole qui définit la communication entre les différentes parties d’une application web. Un client lance une requête HTTP, et le serveur renvoie une réponse à travers plusieurs méthodes dont les plus utilisées sont : POST, GET, PUT et  DELETE.
 ##   Outils
